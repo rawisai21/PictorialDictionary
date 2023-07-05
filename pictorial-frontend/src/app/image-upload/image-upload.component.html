@@ -1,0 +1,64 @@
+
+<nav class="navbar navbar-expand-sm bg-primary navbar-dark">
+    <ul class = "navbar-nav">
+        <li class = "nav-item">
+            <a routerLink="/admin/users" routerLinkActive="active" class="nav-link" >Users List</a>
+        </li>
+        <li class = "nav-item">
+            <a routerLink="/image-upload" routerLinkActive="active" class="nav-link" >Add Image</a>
+        </li>
+        <li class = "nav-item">
+            <a routerLink="/image-suggestions" routerLinkActive="active" class="nav-link" >Suggestions</a>
+        </li>
+        <li class="nav-item">
+            <a routerLink="/home" routerLinkActive="active" class="nav-link" >Log Out</a>
+          </li>
+    </ul>
+  </nav>
+
+<div class="col-md-6 offset-md-3">
+    <h3> Upload Image </h3>
+    <form [formGroup]="reactiveForm">
+    
+        <div class="form-group">
+            <label> Image Name</label>
+            <input type="text" class ="form-control" id = "fileName" formControlName="fileName"
+                name = "fileName">
+            <div *ngIf="reactiveForm.controls.fileName.errors && (reactiveForm.controls.filename.touched || reactiveForm.controls.fileName.dirty)" style="color:red;">
+                <div *ngIf="reactiveForm.hasError('required','fileName')">
+                    fileName is required
+                </div>
+            </div>
+        </div>
+    
+        <div class="form-group">
+            <label> Description</label>
+            <input type="text" class ="form-control" id = "description"  formControlName="description"
+                 name = "description">
+                 <div *ngIf="reactiveForm.controls.description.errors && (reactiveForm.controls.description.touched || reactiveForm.controls.description.dirty)" style="color:red;">
+                    <div *ngIf="reactiveForm.hasError('required','description')">
+                        Description is required
+                    </div>
+                </div>
+        </div>
+    
+        <div class="form-group">
+            <label> Additional Info</label>
+            <input type="text" class ="form-control" id = "addInfo" formControlName="addInfo"
+                 name = "addInfo">
+                 <div *ngIf="reactiveForm.controls.addInfo.errors && (reactiveForm.controls.addInfo.touched || reactiveForm.controls.addInfo.dirty)" style="color:red;">
+                    <div *ngIf="reactiveForm.hasError('required','addInfo')">
+                        addInfo is required
+                    </div>
+                </div>
+        </div>
+
+        <div class="form-group">
+            <label for="image"> Upload Image</label>
+            <input type="file" class ="form-control" id = "image"
+                accept="image/*" name= "image" (change)="onSelectFile($event)" style="height:100%">
+        </div>
+        <br>
+        <button class = "btn btn-success" type ="submit" (click)="saveForm(reactiveForm)">Submit</button>
+    </form>
+    </div> 
